@@ -11,6 +11,27 @@ namespace DigitalWallet.Domain.Entities
         public TransactionStatus Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
 
+
+        public void MarkAsCompleted()
+        {
+            if (Status != TransactionStatus.Pending)
+            {
+                throw new InvalidOperationException("Yalnız Pending statuslu əməliyyat Completed edilə bilər.");
+            }
+
+            Status = TransactionStatus.Completed;
+        }
+
+        public void MarkAsFailed()
+        {
+            if (Status != TransactionStatus.Pending)
+            {
+                throw new InvalidOperationException("Yalnız Pending statuslu əməliyyat Failed edilə bilər.");
+            }
+
+            Status = TransactionStatus.Failed;
+        }
+
         public Transaction(TransactionType type, decimal amount)
         {
             if (amount <= 0)
