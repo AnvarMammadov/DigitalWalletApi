@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DigitalWallet.Domain.Exceptions;
 
 namespace DigitalWallet.Domain.Entities
 {
@@ -22,13 +23,13 @@ namespace DigitalWallet.Domain.Entities
             // Qayda 1: Göndərilən məbləğ sıfır və ya mənfi ola bilməz
             if (amount <= 0)
             {
-                throw new ArgumentException("Daxil edilən məbləğ sıfırdan böyük olmalıdır.", nameof(amount));
+                throw new InvalidTransactionAmountException(amount);
             }
 
             // Qayda 2: Balans bu məbləği çıxmağa bəs etməlidir
             if (Balance < amount)
             {
-                throw new InvalidOperationException("Balansda kifayət qədər vəsait yoxdur.");
+                throw new InsufficientFundsException(Id,amount,Balance);
             }
 
             // Əgər yuxarıdakı "mühafizəçilərdən" keçə bildisə, deməli Happy Path-dir
@@ -38,7 +39,7 @@ namespace DigitalWallet.Domain.Entities
         public void Credit(decimal amount)
         {
             if (amount <= 0) { 
-                throw new ArgumentException("Daxil edilən məbləğ sıfırdan böyük olmalıdır.",nameof(amount));
+                throw new InvalidTransactionAmountException(amount);
             }
             Balance += amount;
         }

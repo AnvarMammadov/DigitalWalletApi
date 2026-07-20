@@ -1,5 +1,6 @@
 ﻿using System;
 using DigitalWallet.Domain.Enums;
+using DigitalWallet.Domain.Exceptions;
 
 namespace DigitalWallet.Domain.Entities
 {
@@ -26,7 +27,7 @@ namespace DigitalWallet.Domain.Entities
 
             if (amount <= 0)
             {
-                throw new ArgumentException("Ledger sətrinin məbləği sıfırdan böyük olmalıdır.", nameof(amount));
+                throw new InvalidTransactionAmountException(amount);
             }
 
             Id = Guid.NewGuid();
