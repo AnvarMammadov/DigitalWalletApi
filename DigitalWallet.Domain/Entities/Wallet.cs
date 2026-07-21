@@ -44,7 +44,7 @@ namespace DigitalWallet.Domain.Entities
             Balance += amount;
         }
 
-        public Wallet(Guid userid , string walletnumber , string currency)
+        public Wallet(Guid userid , string walletnumber , string currency) 
         {
             Id=Guid.NewGuid();
             UserId = userid;
