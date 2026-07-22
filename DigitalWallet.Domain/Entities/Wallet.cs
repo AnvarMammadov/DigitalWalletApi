@@ -16,7 +16,8 @@ namespace DigitalWallet.Domain.Entities
         public decimal Balance { get; private set; }
 
         // Race Condition-ın qarşısını alan optimistik kilidləmə nəzarətçisi
-        public byte[] RowVersion { get; private set; }
+       // public byte[] RowVersion { get; private set; }  --->  bazadan asili oldugu ucun bunu shadow property olaraq
+       // infrastructure qatinda migration seviyyesinde istifade edeceyem 
 
         public void Debit(decimal amount)
         {
