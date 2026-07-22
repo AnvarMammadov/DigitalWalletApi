@@ -10,4 +10,12 @@
     <ProjectReference Include="..\DigitalWallet.Domain\DigitalWallet.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Common\Behaviors\" />
+    <Folder Include="Features\Deposit\" />
+    <Folder Include="Features\GetBalance\" />
+    <Folder Include="Features\WithDraw\" />
+    <Folder Include="Features\Transfer\" />
+  </ItemGroup>
+
 </Project>
