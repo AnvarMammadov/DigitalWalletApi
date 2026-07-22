@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Transactions;
+using Transaction = DigitalWallet.Domain.Entities.Transaction;
 
 namespace DigitalWallet.Application.Interfaces
 {

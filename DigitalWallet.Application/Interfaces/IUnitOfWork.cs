@@ -12,6 +12,6 @@ namespace DigitalWallet.Application.Interfaces
         ITransactionRepository Transactions { get; }    
         ILedgerEntryRepository LedgerEntries { get; }
 
-        Task<int> SaveChangeAsync(CancellationToken cancellationToken=default);
+        Task<int> SaveChangesAsync(CancellationToken cancellationToken=default);
     }
 }
