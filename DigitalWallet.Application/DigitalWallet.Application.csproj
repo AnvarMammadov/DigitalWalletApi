@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -8,12 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DigitalWallet.Domain\DigitalWallet.Domain.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\Deposit\" />
-    <Folder Include="Features\GetBalance\" />
-    <Folder Include="Features\WithDraw\" />
   </ItemGroup>
 
   <ItemGroup>
