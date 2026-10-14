@@ -4,6 +4,9 @@ using DigitalWallet.Application.Features.CreateWallet;
 using DigitalWallet.Application.Features.Deposit;
 using DigitalWallet.Application.Features.WithDraw;
 using DigitalWallet.Application.Features.GetBalance;
+using DigitalWallet.Application.Features.GetTransactions;
+using DigitalWallet.Application.Features.GetWalletSummary;
+using DigitalWallet.Application.Features.ReconcileWallet;
 
 namespace DigitalWallet.WebApi.Controllers
 {
@@ -60,6 +63,35 @@ namespace DigitalWallet.WebApi.Controllers
         {
             var query = new GetBalanceQuery(walletNumber);
             var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+        /// <summary>
+        /// Cüzdanın əməliyyat tarixçəsini (çıxarışını) qaytarır.
+        /// GET /api/wallet/{walletNumber}/transactions
+        /// </summary>
+        [HttpGet("{walletNumber}/transactions")]
+        public async Task<IActionResult> GetTransactions(string walletNumber, CancellationToken cancellationToken)
+        {
+            var query = new GetWalletTransactionsQuery(walletNumber);
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+
+        [HttpGet("{walletNumber}/summary")] 
+        public async Task<IActionResult> GetWalletSummary(string walletNumber, CancellationToken cancellationToken)
+        {
+            var query=new GetWalletSummaryQuery(walletNumber);
+            var result= await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpGet("{walletNumber}/reconcile")]
+        public async Task<IActionResult> GetReconcile(string walletNumber,CancellationToken cancellationToken)
+        {
+            var query=new ReconcileWalletQuery(walletNumber);
+            var result = await _mediator.Send(query,cancellationToken); 
             return Ok(result);
         }
     }

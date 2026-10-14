@@ -186,6 +186,9 @@ docker compose down
 | `POST` | `/api/wallet/deposit` | Deposit money into wallet | `{"walletNumber": "W001", "amount": 200.00}` | `200 OK`, `400`, `404` |
 | `POST` | `/api/wallet/withdraw` | Withdraw money from wallet | `{"walletNumber": "W001", "amount": 50.00}` | `200 OK`, `400`, `404`, `422` |
 | `GET` | `/api/wallet/{walletNumber}/balance` | Query current wallet balance | Route: `walletNumber` | `200 OK`, `404` |
+| `GET` | `/api/wallet/{walletNumber}/transactions` | Query wallet transaction history (statement) | Route: `walletNumber` | `200 OK`, `404` |
+| `GET` | `/api/wallet/{walletNumber}/summary` | Query financial summary (inflow, outflow, count) | Route: `walletNumber` | `200 OK`, `404` |
+| `GET` | `/api/wallet/{walletNumber}/reconcile` | Mathematical balance audit via historic ledger entries | Route: `walletNumber` | `200 OK`, `404` |
 | `POST` | `/api/transfer` | Transfer funds between two wallets | `{"fromWalletNumber": "W001", "toWalletNumber": "W002", "amount": 75.00}` | `200 OK`, `400`, `404`, `422` |
 
 ---
@@ -212,6 +215,9 @@ DigitalWallet/
 │   │   ├── CreateWallet/
 │   │   ├── Deposit/
 │   │   ├── GetBalance/
+│   │   ├── GetTransactions/
+│   │   ├── GetWalletSummary/
+│   │   ├── ReconcileWallet/
 │   │   ├── Transfer/
 │   │   └── WithDraw/
 │   └── Interfaces/                        # IUnitOfWork, IWalletRepository, etc.
