@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  # ========================================================
+  # 1. VERİLƏNLƏR BAZASI SERVİSİ (POSTGRESQL 17)
+  # ========================================================
+  postgres_db:
+    image: postgres:17-alpine
+    container_name: digitalwallet_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: digitalwallet
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d digitalwallet"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # ========================================================
+  # 2. BACKEND API SERVİSİ (.NET 8 WEBAPI)
+  # ========================================================
+  webapi:
+    image: digitalwallet-api
+    container_name: digitalwallet_api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      postgres_db:
+        condition: service_healthy
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__DigitalWalletDb=Host=postgres_db;Port=5432;Database=digitalwallet;Username=postgres;Password=postgrespassword
+    ports:
+      - "5235:8080"
+
+# Məlumatların saxlanması üçün daimi yaddaş (Volume)
+volumes:
+  postgres_data:

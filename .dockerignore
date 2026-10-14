@@ -1,0 +1,12 @@
+**/.git
+**/.github
+**/.vs
+**/.vscode
+**/bin
+**/obj
+**/*.user
+**/*.suo
+**/appsettings.Development.json
+Dockerfile*
+docker-compose*
+README*
