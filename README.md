@@ -133,7 +133,7 @@ Ensure you have [Docker Desktop](https://www.docker.com/) installed and running.
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/DigitalWallet.git
+git clone https://github.com/AnvarMammadov/DigitalWalletApi.git
 cd DigitalWallet
 
 # 2. Build and start containers
